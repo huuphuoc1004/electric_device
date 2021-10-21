@@ -1,0 +1,6 @@
+@include('template.electronic.header')
+@include('template.electronic.category')
+@include('template.electronic.menu')
+@yield('main_content')
+@include('template.electronic.footer')
+@include('template.electronic.js')
