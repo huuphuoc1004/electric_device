@@ -18,115 +18,88 @@
                 </div>
             </div>
         </div>
+        <!-- The Modal -->
+        <div class="modal" id="myModal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                    <h4 class="modal-title">Create User</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label>Name</label>
+                            <input v-model="user.name" type="text" class="form-control" placeholder="Name...">
+                        </div>
+                        <div class="form-group">
+                            <label>Category_User_ID</label>
+                            <select v-model="user.category_user_id" class="form-control">
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Email</label>
+                            <input v-model="user.email" type="text" class="form-control" placeholder="Email...">
+                        </div>
+                        <div class="form-group">
+                            <label>Password</label>
+                            <input v-model="user.password" type="password" class="form-control" placeholder="Password...">
+                        </div>
+                        <div class="form-group">
+                            <label>Confirm Password</label>
+                            <input v-model="user.confirm_password" type="password" class="form-control" placeholder="Password...">
+                        </div>
+                    </div>
+                    <!-- Modal footer -->
+                    <div class="modal-footer">
+                        <button class="btn btn-primary" @click="createUser" >Add User</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="container-fluid">
             <div class="row clearfix">
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="table-responsive">
+                            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal">
+                                Create User
+                            </button>
                             <table class="table table-hover product_item_list c_table theme-color mb-0">
                                 <thead>
                                     <tr>
-                                        <th>Image</th>
-                                        <th>Product Name</th>
-                                        <th data-breakpoints="sm xs">Detail</th>
-                                        <th data-breakpoints="xs">Amount</th>
-                                        <th data-breakpoints="xs md">Stock</th>
+                                        <th>#</th>
+                                        <th>Name</th>
+                                        <th>Category_User</th>
+                                        <th>Email</th>
                                         <th data-breakpoints="sm xs md">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td><img src="/css/admin/images/ecommerce/1.png" width="48" alt="Product img"></td>
-                                        <td><h5>Simple Black Clock</h5></td>
-                                        <td><span class="text-muted">randomised words even slightly believable</span></td>
-                                        <td>$16.00</td>
-                                        <td><span class="col-green">In Stock</span></td>
-                                        <td>
-                                            <a href="javascript:void(0);" class="btn btn-default waves-effect waves-float btn-sm waves-green"><i class="zmdi zmdi-edit"></i></a>
-                                            <a href="javascript:void(0);" class="btn btn-default waves-effect waves-float btn-sm waves-red"><i class="zmdi zmdi-delete"></i></a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td><img src="/css/admin/images/ecommerce/10.png" width="48" alt="Product img"></td>
-                                        <td><h5>Brone Candle</h5></td>
-                                        <td><span class="text-muted">It is a long established  will be distracted</span></td>
-                                        <td>$15.00</td>
-                                        <td><span class="col-amber">Low Stock</span></td>
-                                        <td>
-                                            <a href="javascript:void(0);" class="btn btn-default waves-effect waves-float btn-sm waves-green"><i class="zmdi zmdi-edit"></i></a>
-                                            <a href="javascript:void(0);" class="btn btn-default waves-effect waves-float btn-sm waves-red"><i class="zmdi zmdi-delete"></i></a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td><img src="/css/admin/images/ecommerce/11.png" width="48" alt="Product img"></td>
-                                        <td><h5>Wood Simple Clock</h5></td>
-                                        <td><span class="text-muted">There passages of Lorem Ipsum available</span></td>
-                                        <td>$16.00</td>
-                                        <td><span class="col-amber">Low Stock</span></td>
-                                        <td>
-                                            <a href="javascript:void(0);" class="btn btn-default waves-effect waves-float btn-sm waves-green"><i class="zmdi zmdi-edit"></i></a>
-                                            <a href="javascript:void(0);" class="btn btn-default waves-effect waves-float btn-sm waves-red"><i class="zmdi zmdi-delete"></i></a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td><img src="/css/admin/images/ecommerce/5.png" width="48" alt="Product img"></td>
-                                        <td><h5>Unero Small Bag</h5></td>
-                                        <td><span class="text-muted">It is a long established fact that a distracted</span></td>
-                                        <td>$23.00</td>
-                                        <td><span class="col-red">Out Of Stock</span></td>
-                                        <td>
-                                            <a href="javascript:void(0);" class="btn btn-default waves-effect waves-float btn-sm waves-green"><i class="zmdi zmdi-edit"></i></a>
-                                            <a href="javascript:void(0);" class="btn btn-default waves-effect waves-float btn-sm waves-red"><i class="zmdi zmdi-delete"></i></a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td><img src="/css/admin/images/ecommerce/6.png" width="48" alt="Product img"></td>
-                                        <td><h5>Simple Black Clock</h5></td>
-                                        <td><span class="text-muted">Contrary to popular belief, simply random text</span></td>
-                                        <td>$16.00</td>
-                                        <td><span class="col-green">In Stock</span></td>
-                                        <td>
-                                            <a href="javascript:void(0);" class="btn btn-default waves-effect waves-float btn-sm waves-green"><i class="zmdi zmdi-edit"></i></a>
-                                            <a href="javascript:void(0);" class="btn btn-default waves-effect waves-float btn-sm waves-red"><i class="zmdi zmdi-delete"></i></a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td><img src="/css/admin/images/ecommerce/2.png" width="48" alt="Product img"></td>
-                                        <td><h5>Brone Lamp Glasses</h5></td>
-                                        <td><span class="text-muted">All the Lorem Ipsum generators on predefined chunks</span></td>
-                                        <td>$12.00</td>
-                                        <td><span class="col-green">In Stock</span></td>
-                                        <td>
-                                            <a href="javascript:void(0);" class="btn btn-default waves-effect waves-float btn-sm waves-green"><i class="zmdi zmdi-edit"></i></a>
-                                            <a href="javascript:void(0);" class="btn btn-default waves-effect waves-float btn-sm waves-red"><i class="zmdi zmdi-delete"></i></a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td><img src="/css/admin/images/ecommerce/3.png" width="48" alt="Product img"></td>
-                                        <td><h5>Simple Black Clock</h5></td>
-                                        <td><span class="text-muted">established fact that a be distracted</span></td>
-                                        <td>$22.00</td>
-                                        <td><span class="col-red">Out Of Stock</span></td>
-                                        <td>
-                                            <a href="javascript:void(0);" class="btn btn-default waves-effect waves-float btn-sm waves-green"><i class="zmdi zmdi-edit"></i></a>
-                                            <a href="javascript:void(0);" class="btn btn-default waves-effect waves-float btn-sm waves-red"><i class="zmdi zmdi-delete"></i></a>
-                                        </td>
-                                    </tr>        
+                                    @foreach ($users as $user)
+                                        <tr>
+                                            <td>{{ $user->id}}</td>
+                                            <td>{{ $user->name}}</td>
+                                            <td>{{ $user->categoryUser->name}}</td>
+                                            <td>{{ $user->email}}</td>
+                                            <td>
+                                                <a href="javascript:void(0);" class="btn btn-default waves-effect waves-float btn-sm waves-green"><i class="zmdi zmdi-edit"></i></a>
+                                                <a href="javascript:void(0);" class="btn btn-default waves-effect waves-float btn-sm waves-red"><i class="zmdi zmdi-delete"></i></a>
+                                            </td>
+                                        </tr>
+                                    @endforeach     
                                 </tbody>
                             </table>
                         </div>
                     </div>
-                    <div class="card">
-                        <div class="body">                            
-                            <ul class="pagination pagination-primary m-b-0">
-                                <li class="page-item"><a class="page-link" href="javascript:void(0);"><i class="zmdi zmdi-arrow-left"></i></a></li>
-                                <li class="page-item active"><a class="page-link" href="javascript:void(0);">1</a></li>
-                                <li class="page-item"><a class="page-link" href="javascript:void(0);">2</a></li>
-                                <li class="page-item"><a class="page-link" href="javascript:void(0);">3</a></li>
-                                <li class="page-item"><a class="page-link" href="javascript:void(0);">4</a></li>
-                                <li class="page-item"><a class="page-link" href="javascript:void(0);"><i class="zmdi zmdi-arrow-right"></i></a></li>
-                            </ul>
-                        </div>
+                    <div class="pagination pagination-primary m-b-0 page-item">                            
+                        {{ $users->links() }}
                     </div>
                 </div>
             </div>

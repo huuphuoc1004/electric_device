@@ -212,7 +212,7 @@
         <li><a href="javascript:void(0);" class="app_google_drive" title="Google Drive"><i class="zmdi zmdi-google-drive"></i></a></li>
         <li><a href="javascript:void(0);" class="app_group_work" title="Group Work"><i class="zmdi zmdi-group-work"></i></a></li>
         <li><a href="javascript:void(0);" class="js-right-sidebar" title="Setting"><i class="zmdi zmdi-settings zmdi-hc-spin"></i></a></li>
-        <li><a href="{{ route('auth.sign_in_admin') }}" class="mega-menu" title="Sign Out"><i class="zmdi zmdi-power"></i></a></li>
+        <li><a href="{{ route('auth.logout') }}" class="mega-menu" title="Sign Out"><i class="zmdi zmdi-power"></i></a></li>
     </ul>
 </div>
 
@@ -262,6 +262,7 @@
             <li><a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-shopping-cart"></i><span>Ecommerce</span></a>
                 <ul class="ml-menu">
                     <li><a href="ec-dashboard.html">Dashboard</a></li>
+                    <li><a href="{{ route('category_product.index') }}">Category Product</a></li>
                     <li><a href="{{ route('product.index') }}">Product</a></li>
                     <li><a href="{{ route('user.index') }}">User</a></li>
                     <li><a href="{{ route('admin.form') }}">Form</a></li>

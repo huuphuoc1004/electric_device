@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\CategoryProductController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Auth\AuthController;
@@ -18,10 +19,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::prefix('admin')->group(function(){
+Route::prefix('admin')->middleware('auth')->group(function(){
     Route::get('/',[AdminController::class,'index'])->name("admin.index");
     Route::resource('user', UserController::class);
     Route::resource('product', ProductController::class);
+    Route::resource('category_product', CategoryProductController::class);
     Route::get('/form',[ProductController::class,'form'])->name("admin.form");
 });
 
@@ -54,8 +56,12 @@ Route::group(['namespace' => 'electronic'], function (){
 
 Route::group(['namespace' => 'auth'], function (){
     Route::get('/my_account',[AuthController::class,'myAccount'])->name('auth.my_account');
-    Route::get('/login_register',[AuthController::class,'loginRegister'])->name('auth.login_register');
+    Route::get('/login_user',[AuthController::class,'loginRegister'])->name('auth.login_user');
+    Route::post('/login_user',[AuthController::class,'postLoginUser'])->name('auth.login_user');
+    Route::get('/register_user',[AuthController::class,'loginRegister'])->name('auth.register_user');
+    Route::post('/register_user',[AuthController::class,'postRegister'])->name('auth.register_user');
     Route::get('/sign_in_admin',[AuthController::class,'signInAdmin'])->name('auth.sign_in_admin');
     Route::get('/sign_up_admin',[AuthController::class,'signUpAdmin'])->name('auth.sign_up_admin');
     Route::get('/forgot_password',[AuthController::class,'forgotPassword'])->name('auth.forgot_password');
+    Route::get('/logout', [AuthController::class, 'logout'])->name('auth.logout');
 });

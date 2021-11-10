@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Services\Admin\UserService;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -12,9 +13,15 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function __construct(UserService $userService)
+    {
+        $this->userService = $userService;        
+    }
     public function index()
     {
-        return view('admin.user.index');
+        $users = $this->userService->getUser(2);
+        return view('admin.user.index', compact('users'));
     }
 
     /**

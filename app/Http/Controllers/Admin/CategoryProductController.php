@@ -3,24 +3,25 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Services\Admin\ProductService;
+use App\Services\Admin\CategoryProductService;
 use Illuminate\Http\Request;
 
-class ProductController extends Controller
+class CategoryProductController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function __construct(ProductService $productService)
+
+    public function __construct(CategoryProductService $categoryProductService)
     {
-        $this->productService = $productService;
-    }
+        $this->categoryProductService = $categoryProductService;
+    } 
     public function index()
     {
-        $products = $this->productService->getProduct(2);
-        return view('admin.product.index', compact('products'));
+        $categoryProducts = $this->categoryProductService->getCategoryProduct(1);
+        return view('admin.category_product.index', compact('categoryProducts'));
     }
 
     /**
@@ -87,10 +88,5 @@ class ProductController extends Controller
     public function destroy($id)
     {
         //
-    }
-
-    public function form()
-    {
-        return view('admin.product.form');
     }
 }

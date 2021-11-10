@@ -20,6 +20,7 @@
     <link href="{{ asset('/css/admin/plugins/jquery-spinner/css/bootstrap-spinner.css') }}" rel="stylesheet">
     <link href="{{ asset('/css/admin/plugins/jvectormap/jquery-jvectormap-2.0.3.css') }}" rel="stylesheet">
     <link href="{{ asset('/css/admin/plugins/bootstrap-tagsinput/bootstrap-tagsinput.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 </head>
 

@@ -85,7 +85,7 @@
                     <div class="row">
                         <div class="col-lg-6 col-md-5">
                             <div class="header-call-action">
-                                <a href="#">
+                                <a href="{{ route('admin.index') }}">
                                     <i class="fa fa-envelope"></i>
                                     info@website.com
                                 </a>
@@ -108,8 +108,8 @@
                                                 </a>
                                                 <div class="dropdown-menu" aria-labelledby="myaccount">
                                                     <a class="dropdown-item" href="{{ route('auth.my_account') }}">my account</a>
-                                                    <a class="dropdown-item" href="{{ route('auth.login_register') }}"> login</a>
-                                                    <a class="dropdown-item" href="{{ route('auth.login_register') }}">register</a>
+                                                    <a class="dropdown-item" href="{{ route('auth.login_user') }}"> login</a>
+                                                    <a class="dropdown-item" href="{{ route('auth.register_user') }}">register</a>
                                                 </div>
                                             </div>
                                         </li>

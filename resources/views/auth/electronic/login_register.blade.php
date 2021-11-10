@@ -28,12 +28,17 @@
                         <div class="col-lg-6">
                             <div class="login-reg-form-wrap  pr-lg-50">
                                 <h2>Sign In</h2>
-                                <form action="#" method="post">
+                                @if (session('msgLogin'))
+                                    <div class="alert alert-danger">
+                                        <p>{{ session('msgLogin') }}</p>
+                                    </div>
+                                @endif
+                                {!! Form::open(['method' => 'POST', 'route' => ['auth.login_user']]) !!}
                                     <div class="single-input-item">
-                                        <input type="email" placeholder="Email or Username" required />
+                                        <input type="email" name="email" placeholder="Enter your Email"/>
                                     </div>
                                     <div class="single-input-item">
-                                        <input type="password" placeholder="Enter your Password" required />
+                                        {{ Form::password('password', ['placeholder' =>  'Enter your Password']) }}
                                     </div>
                                     <div class="single-input-item">
                                         <div class="login-reg-form-meta d-flex align-items-center justify-content-between">
@@ -49,7 +54,7 @@
                                     <div class="single-input-item">
                                         <button class="sqr-btn">Login</button>
                                     </div>
-                                </form>
+                                {!! Form::close() !!}
                             </div>
                         </div>
                         <!-- Login Content End -->
@@ -58,24 +63,32 @@
                         <div class="col-lg-6">
                             <div class="login-reg-form-wrap mt-md-34 mt-sm-34">
                                 <h2>Singup Form</h2>
-                                <form action="#" method="post">
+                                @if (session('msgRegister'))
+                                    <div class="alert alert-danger">
+                                        <p>{{ session('msgRegister') }}</p>
+                                    </div>
+                                @endif
+                                {!! Form::open(['method' => 'POST', 'route' => ['auth.register_user']]) !!}
                                     <div class="single-input-item">
-                                        <input type="text" placeholder="Full Name" required />
+                                        {{ Form::text('name', null, ['placeholder' => 'Full Name']) }}
                                     </div>
                                     <div class="single-input-item">
-                                        <input type="email" placeholder="Enter your Email" required />
+                                        <input type="email" name="email" placeholder="Enter your Email" required />
                                     </div>
                                     <div class="row">
                                         <div class="col-lg-6">
                                             <div class="single-input-item">
-                                                <input type="password" placeholder="Enter your Password" required />
+                                                {{ Form::password('password', ['placeholder' =>  'Enter your Password']) }}
                                             </div>
                                         </div>
                                         <div class="col-lg-6">
                                             <div class="single-input-item">
-                                                <input type="password" placeholder="Repeat your Password" required />
+                                                {{ Form::password('password', ['placeholder' =>  'Repeat your Password']) }}
                                             </div>
                                         </div>
+                                    </div>
+                                    <div class="single-input-item">
+                                        {{ Form::text('phone', null, ['placeholder' => 'Your Phone']) }}
                                     </div>
                                     <div class="single-input-item">
                                         <div class="login-reg-form-meta">
@@ -90,7 +103,7 @@
                                     <div class="single-input-item">
                                         <button class="sqr-btn">Register</button>
                                     </div>
-                                </form>
+                                {!! Form::close() !!}
                             </div>
                         </div>
                         <!-- Register Content End -->
