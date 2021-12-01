@@ -17,4 +17,13 @@ class ProductService extends BaseService
         return $this->model->paginate($limit);
     }
 
+    public function create($inputs, $file)
+    {
+        $picture = $this->uploadImage($file, $this->model);
+        $inputs['picture'] = $picture;
+        $this->model->create($inputs);
+        
+        return $this->model;
+    }
+
 }

@@ -20,48 +20,55 @@
         </div>
         <!-- Button to Open the Modal -->
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
-            Create User
+            Thêm sản phẩm
         </button>
         <!-- The Modal -->
         <div class="modal" id="myModal">
             <div class="modal-dialog">
-                <div class="modal-content">
+                <div class="modal-content lg">
                     <!-- Modal Header -->
                     <div class="modal-header">
-                    <h4 class="modal-title">Create User</h4>
+                    <h4 class="modal-title">Thêm sản phẩm</h4>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                     </div>
                     <!-- Modal body -->
-                    <div class="modal-body">
-                        <div class="form-group">
-                            <label>Name</label>
-                            <input v-model="user.name" type="text" class="form-control" placeholder="Name...">
+                    {!! Form::open(['method' => 'POST', 'url' => route('product.store'), 'enctype' => 'multipart/form-data']) !!}
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label>Name</label>
+                                <input name="name" type="text" class="form-control" placeholder="Name...">
+                            </div>
+                            <div class="form-group">
+                                <label>Category_User_ID</label>
+                                <select  class="form-control">
+                                    @foreach ($categories as $category)
+                                        <option>{{ $category->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Description</label>
+                                <input name="description" type="text" class="form-control" placeholder="Email...">
+                            </div>
+                            <div class="form-group">
+                                <label>Price</label>
+                                <input name="price" type="text" class="form-control" placeholder="Price...">
+                            </div>
+                            <div class="form-group">
+                                <label>Discount</label>
+                                <input name="discount" type="text" class="form-control" placeholder="Discount...">
+                            </div>
+                            <div class="form-group">
+                                <label>Picture</label>
+                                <input name="picture" type="file" class="form-control" placeholder="Discount...">
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label>Category_User_ID</label>
-                            <select v-model="user.category_user_id" class="form-control">
-                                <option>
-                                </option>
-                            </select>
+                        <!-- Modal footer -->
+                        <div class="modal-footer">
+                            <button class="btn btn-primary">Thêm sản phẩm</button>
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                         </div>
-                        <div class="form-group">
-                            <label>Email</label>
-                            <input v-model="user.email" type="text" class="form-control" placeholder="Email...">
-                        </div>
-                        <div class="form-group">
-                            <label>Password</label>
-                            <input v-model="user.password" type="password" class="form-control" placeholder="Password...">
-                        </div>
-                        <div class="form-group">
-                            <label>Confirm Password</label>
-                            <input v-model="user.confirm_password" type="password" class="form-control" placeholder="Password...">
-                        </div>
-                    </div>
-                    <!-- Modal footer -->
-                    <div class="modal-footer">
-                        <button class="btn btn-primary">Add User</button>
-                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                    </div>
+                    {!! Form::close() !!}
                 </div>
             </div>
         </div>

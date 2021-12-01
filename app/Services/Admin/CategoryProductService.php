@@ -13,7 +13,7 @@ class CategoryProductService extends BaseService
 
     public function getCategoryProduct($limit = 5) 
     {
-        return $this->model->paginate($limit);
+        return $this->model->get();
     }
 
 }

@@ -103,13 +103,21 @@
                                             <div class="dropdown header-top-dropdown">
                                                 <a class="dropdown-toggle" id="myaccount" data-toggle="dropdown"
                                                     aria-haspopup="true" aria-expanded="false">
+                                                    @if (Auth::user())
+                                                        Xin chao, {{Auth::user()->name }}
+                                                    @else
                                                     my account
+                                                    @endif
                                                     <i class="fa fa-angle-down"></i>
                                                 </a>
                                                 <div class="dropdown-menu" aria-labelledby="myaccount">
                                                     <a class="dropdown-item" href="{{ route('auth.my_account') }}">my account</a>
-                                                    <a class="dropdown-item" href="{{ route('auth.login_user') }}"> login</a>
-                                                    <a class="dropdown-item" href="{{ route('auth.register_user') }}">register</a>
+                                                    @if (Auth::user())
+                                                        <a class="dropdown-item" href="{{ route('auth.logout') }}">logout</a>
+                                                    @else
+                                                        <a class="dropdown-item" href="{{ route('auth.login_user') }}"> login</a>
+                                                        <a class="dropdown-item" href="{{ route('auth.register_user') }}">register</a>
+                                                    @endif
                                                 </div>
                                             </div>
                                         </li>

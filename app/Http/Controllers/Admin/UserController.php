@@ -3,6 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\UserCreateRequest;
+use App\Models\CategoryUser;
+use App\Services\Admin\CategoryUserService;
 use App\Services\Admin\UserService;
 use Illuminate\Http\Request;
 
@@ -14,13 +17,14 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function __construct(UserService $userService)
+    public function __construct(UserService $userService, CategoryUserService $categoryUserService)
     {
         $this->userService = $userService;        
+        $this->categoryUserService = $categoryUserService;
     }
     public function index()
     {
-        $users = $this->userService->getUser(2);
+        $users = $this->userService->getUser(3);
         return view('admin.user.index', compact('users'));
     }
 
@@ -31,7 +35,8 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        $categoryUser = $this->categoryUserService->getUserForSelect();
+        return view('admin.user.create', compact('categoryUser'));
     }
 
     /**
@@ -40,9 +45,14 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(UserCreateRequest $request)
     {
-        //
+        $userParam = $request->all();
+        if ($this->userService->create($userParam)) {
+            return redirect()->route('user.index')->with('msgAddSuccess', 'Thêm người dùng thành công.');
+        } else {
+            return redirect()->route('user.create')->with('msgAddFail', 'Thêm người dùng không thành công.');
+        }
     }
 
     /**

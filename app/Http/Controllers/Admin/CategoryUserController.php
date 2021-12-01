@@ -4,26 +4,22 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Services\Admin\CategoryProductService;
-use App\Services\Admin\ProductService;
 use Illuminate\Http\Request;
 
-class ProductController extends Controller
+class CategoryUserController extends Controller
 {
+    public function __construct(CategoryProductService $categoryProductService)
+    {
+        $this->categoryProductService = $categoryProductService;
+    }
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function __construct(ProductService $productService, CategoryProductService $categoryProductService)
-    {
-        $this->productService = $productService;
-        $this->categoryProductService = $categoryProductService;
-    }
     public function index()
     {
-        $products = $this->productService->getProduct(2);
-        $categories = $this->categoryProductService->getCategoryProduct();
-        return view('admin.product.index', compact('products', 'categories'));
+        
     }
 
     /**
@@ -44,12 +40,7 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        $productParam = $request->all();
-        if ($this->productService->create($productParam, $request->file('file'))) {
-            return redirect()->route('product.index')->with('msgAddSuccess', trans('admin.addSuccess'));
-        } else {
-            return redirect()->route('product.index')->with('msgAddFail', trans('admin.addError'));
-        }
+        //
     }
 
     /**
@@ -95,10 +86,5 @@ class ProductController extends Controller
     public function destroy($id)
     {
         //
-    }
-
-    public function form()
-    {
-        return view('admin.product.form');
     }
 }

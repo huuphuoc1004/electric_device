@@ -26,17 +26,12 @@ class AuthController extends Controller
 
     public function postLoginUser(Request $request)
     {
-        $loginData = [
+        $credentials = [
             'email' => $request->email,
             'password' => $request->password,
         ];
-        if (Auth::attempt($loginData)) {
-            $this->user = Auth::user();
-            if ($this->user->isAdmin()) {
-                return redirect()->route('admin.index');
-            } else {
-                return redirect()->route('electronic.index');
-            }
+        if (Auth::attempt($credentials)) {
+            return redirect()->route('admin.index');
         } else {
             return redirect()->route('auth.login_user')->with('msgLogin', 'Email hoặc mật khẩu bị sai. Vui lòng đăng nhập lại!');
         }

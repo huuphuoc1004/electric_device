@@ -11,9 +11,14 @@ class UserService extends BaseService
         $this->model = $user;
     }
 
-    public function getUser($limit = 5) 
+    public function getUser($limit=10) 
     {
         return $this->model->paginate($limit);
+    }
+
+    public function create($inputs)
+    {
+        return $this->model->create($inputs);
     }
 
 }
