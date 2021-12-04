@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CategoryProductCreateRequest;
+use App\Http\Requests\CategoryProductUpdateRequest;
 use App\Services\Admin\CategoryProductService;
 use Illuminate\Http\Request;
 
@@ -20,7 +22,7 @@ class CategoryProductController extends Controller
     } 
     public function index()
     {
-        $categoryProducts = $this->categoryProductService->getCategoryProduct(1);
+        $categoryProducts = $this->categoryProductService->getModel();
         return view('admin.category_product.index', compact('categoryProducts'));
     }
 
@@ -31,7 +33,7 @@ class CategoryProductController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.category_product.create');
     }
 
     /**
@@ -40,9 +42,14 @@ class CategoryProductController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CategoryProductCreateRequest $request)
     {
-        //
+        $categoryProductParam = $request->validated();
+        if ($this->categoryProductService->createHasImages($categoryProductParam, $request->file('file'))) {
+            return redirect()->route('category_product.index')->with('msgAddSuccess', 'Thêm loại sản phẩm thành công.');
+        } else {
+            return redirect()->route('category_product.create')->with('msgAddFail', 'Thêm loại sản phẩm không thành công.');
+        }
     }
 
     /**
@@ -64,7 +71,9 @@ class CategoryProductController extends Controller
      */
     public function edit($id)
     {
-        //
+        $categoryProduct = $this->categoryProductService->getModelUpdate($id);
+
+        return view('admin.category_product.edit', compact('categoryProduct'));
     }
 
     /**
@@ -74,11 +83,15 @@ class CategoryProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(CategoryProductUpdateRequest $request, $id)
     {
-        //
+        $categoryProductParam = $request->validated();
+        if ($this->categoryProductService->updateHasImages($categoryProductParam, $id, $request->file('file'))) {
+            return redirect()->route('category_product.index')->with('msgUpdateSuccess', 'Sửa loại sản phẩm thành công');
+        } else {
+            return redirect()->route('category_product.edit')->with('msgUpdateFail', 'Sửa loại sản phẩm không thành công');
+        }
     }
-
     /**
      * Remove the specified resource from storage.
      *
@@ -87,6 +100,18 @@ class CategoryProductController extends Controller
      */
     public function destroy($id)
     {
-        //
+        if ($this->categoryProductService->deleteHasImages($id)) {
+            return redirect()->route('category_product.index')->with('msgDeleteSuccess', 'Xóa thành công');
+        } else {
+            return redirect()->route('category_product.index')->with('msgDeleteFail', 'Xóa không thành công');
+        }
+    }
+
+    public function search(Request $request)
+    {
+        $search = $request->search;
+        $categoryProducts = $this->categoryProductService->find($search);
+        
+        return view('admin.category_product.index')->with(compact('categoryProducts'));
     }
 }

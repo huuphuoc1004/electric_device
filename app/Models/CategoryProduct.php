@@ -9,9 +9,14 @@ use Illuminate\Support\Facades\Storage;
 class CategoryProduct extends Model
 {
     use HasFactory;
-    
+
+    protected $fillable = [
+        'name',  
+        'picture',
+    ];
     public function getPictureUrlAttribute()
     {
         return $this->picture ? Storage::url(detectFolderByModel($this) . $this->picture) : '';
     }
+
 }

@@ -15,4 +15,11 @@ class CategoryUserService extends BaseService
         return $this->model->pluck('name', 'id');
     }
 
+    public function find($data)
+    {
+        $limit = $limit ?? config('common.pagination.default');
+        return CategoryUser::where('name', 'LIKE', '%' . $data . '%')
+            ->paginate($limit);
+    }
+
 }

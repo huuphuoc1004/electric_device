@@ -3,14 +3,16 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CategoryUserRequest;
 use App\Services\Admin\CategoryProductService;
+use App\Services\Admin\CategoryUserService;
 use Illuminate\Http\Request;
 
 class CategoryUserController extends Controller
 {
-    public function __construct(CategoryProductService $categoryProductService)
+    public function __construct(CategoryUserService $categoryUserService)
     {
-        $this->categoryProductService = $categoryProductService;
+        $this->categoryUserService = $categoryUserService;
     }
     /**
      * Display a listing of the resource.
@@ -19,7 +21,8 @@ class CategoryUserController extends Controller
      */
     public function index()
     {
-        
+        $categoryUsers = $this->categoryUserService->getModel();
+        return view('admin.category_user.index', compact('categoryUsers'));
     }
 
     /**
@@ -29,7 +32,7 @@ class CategoryUserController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.category_user.create');
     }
 
     /**
@@ -38,9 +41,14 @@ class CategoryUserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CategoryUserRequest $request)
     {
-        //
+        $categoryUserParam = $request->all();
+        if ($this->categoryUserService->createModel($categoryUserParam)) {
+            return redirect()->route('category_user.index')->with('msgAddSuccess', 'Thêm loại người dùng thành công.');
+        } else {
+            return redirect()->route('category_user.create')->with('msgAddFail', 'Thêm loại người dùng không thành công.');
+        }
     }
 
     /**
@@ -62,7 +70,9 @@ class CategoryUserController extends Controller
      */
     public function edit($id)
     {
-        //
+        $categoryUser = $this->categoryUserService->getModelUpdate($id);
+
+        return view('admin.category_user.edit', compact('categoryUser'));
     }
 
     /**
@@ -72,9 +82,14 @@ class CategoryUserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(CategoryUserRequest $request, $id)
     {
-        //
+        $categoryUserParam = $request->all();
+        if ($this->categoryUserService->updateHasImages($categoryUserParam, $id)) {
+            return redirect()->route('category_user.index')->with('msgUpdateSuccess', 'Cập nhật loại người dùng thành công');
+        } else {
+            return redirect()->route('category_user.edit')->with('msgAddFail', 'Sửa danh mục không thành công.');
+        }
     }
 
     /**
@@ -85,6 +100,18 @@ class CategoryUserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        if ($this->categoryUserService->deleteModel($id)) {
+            return redirect()->route('category_user.index')->with('msgDeleteSuccess', 'Xóa thành công');
+        } else {
+            return redirect()->route('category_user.index')->with('msgDeleteFail', 'Xóa không thành công');
+        }
+    }
+
+    public function search(Request $request)
+    {
+        $search = $request->search;
+        $categoryUsers = $this->categoryUserService->find($search);
+        
+        return view('admin.category_user.index')->with(compact('categoryUsers'));
     }
 }

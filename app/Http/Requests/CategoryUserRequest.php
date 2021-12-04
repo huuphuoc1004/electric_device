@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CategoryUserUpdateRequest extends FormRequest
+class CategoryUserRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -13,7 +13,7 @@ class CategoryUserUpdateRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,13 @@ class CategoryUserUpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'name' => 'required|min:2',
+        ];
+    }
+    public function messages(){
+        return [
+            'name.required' => 'Tên danh mục không được để trống',
+            'name.min' => 'Tên danh mục phải ít nhất có 2 ký tự',
         ];
     }
 }

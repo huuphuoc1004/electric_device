@@ -7,12 +7,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Bảng danh mục người dùng</h1>
+            <h1>BẢNG DANH MỤC SẢN PHẨM</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">DataTables</li>
+              <li class="breadcrumb-item active">Danh mục sản phẩm</li>
             </ol>
           </div>
         </div>
@@ -27,13 +27,13 @@
             <div class="card">
               <div class="row">
                 <div class="pl-4 pt-3 col-3">
-                  <a href="{{ route('category_user.create') }}">
-                      <button type="button" class="btn btn-primary">Thêm danh mục người dùng</button>
+                  <a href="{{ route('category_product.create') }}">
+                      <button type="button" class="btn btn-primary">Thêm danh mục sản phẩm</button>
                   </a>
                 </div>
                 <div class="col-4"></div>
                 <div class="col-4 pl-4 pt-3 row">
-                    {!! Form::open(['method' => 'GET', 'url' => route('category_user.search')]) !!}
+                    {!! Form::open(['method' => 'GET', 'url' => route('category_product.search')]) !!}
                         {{ Form::text('search', null, ['class' => 'form-control col-6', 'placeholder' =>  'Nhập dữ liệu', 'style' => 'float:left; width: 240px; margin-right: 10px;']) }}
                         {!! Form::submit( 'Tìm kiếm', ['class' => 'btn btn-warning col-4', 'style' => 'float:left']) !!}
                     {!! Form::close() !!}
@@ -46,19 +46,19 @@
                 <table id="example2" class="table table-bordered table-hover">
                   <thead>
                     <tr>
-                        <th>#</th>
-                        <th>Tên danh mục</th>
+                        <th>Tên loại sản phẩm</th>
+                        <th>Hình ảnh</th>
                         <th style="width: 170px">Hành động</th>
                     </tr>
                   </thead>
                   <tbody>
-                    @forelse ($categoryUsers as $categoryUser)
+                    @forelse ($categoryProducts as $categoryProduct)
                         <tr>
-                            <td>{{ $categoryUser->id }}</td>
-                            <td>{{ $categoryUser->name }}</td>
+                            <td>{{ $categoryProduct->name }}</td>
+                            <td><img src="{{ $categoryProduct->pictureUrl }}" style="width: 200px; height: 150px" alt=""></td>
                             <td>
-                                <a href="{{ route('category_user.edit', $categoryUser->id) }}" class="btn btn-success" style="width: 70px; float:left; margin-right: 4px">Sửa</a>
-                                {!! Form::open(['method' => 'DELETE', 'url' => route('category_user.destroy', $categoryUser->id)]) !!}
+                                <a href="{{ route('category_product.edit', $categoryProduct->id) }}" class="btn btn-success" style="width: 70px; float:left; margin-right: 4px">Sửa</a>
+                                {!! Form::open(['method' => 'DELETE', 'url' => route('category_product.destroy', $categoryProduct->id)]) !!}
                                   {!! Form::submit('Xóa', ['class' => 'btn btn-danger', 'style' => 'width: 70px; float:left']) !!}
                                 {!! Form::close() !!}
                             </td>
@@ -71,14 +71,14 @@
                   </tbody>
                   <tfoot>
                     <tr>
-                      <th>#</th>
-                      <th>Tên danh mục</th>
+                      <th>Tên loại sản phẩm</th>
+                      <th>Hình ảnh</th>
                       <th style="width: 170px">Hành động</th>
                     </tr>
                   </tfoot>
                 </table>
                 <nav class="mt-3 pagination justify-content-center">
-                    {{ $categoryUsers->links() }}
+                    {{ $categoryProducts->links() }}
                 </nav>
               </div>
               <!-- /.card-body -->

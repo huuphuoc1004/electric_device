@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\CategoryProductController;
+use App\Http\Controllers\Admin\CategoryUserController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Auth\AuthController;
@@ -23,23 +24,25 @@ Route::prefix('admin')->middleware('auth')->group(function(){
     Route::get('/',[AdminController::class,'index'])->name("admin.index");
     Route::resource('user', UserController::class);
     Route::get('/searchUser',[UserController::class,'search'])->name('user.search');
+    Route::resource('category_user', CategoryUserController::class);
+    Route::get('/searchCategoryUser',[CategoryUserController::class,'search'])->name('category_user.search');
     Route::resource('product', ProductController::class);
     Route::resource('category_product', CategoryProductController::class);
-    Route::get('/form',[ProductController::class,'form'])->name("admin.form");
+    Route::get('/searchCategoryProduct',[CategoryProductController::class,'search'])->name('category_product.search');
 });
 
-Route::group(['namespace' => 'electronic'], function (){
-    Route::get('/',[ElectronicController::class,'index'])->name('electronic.index');
-    Route::get('/all_product',[ElectronicController::class,'allProduct'])->name('electronic.all_product');
-    Route::get('/category',[ElectronicController::class,'category'])->name('electronic.category');
-    Route::get('/product',[ElectronicController::class,'productDetail'])->name('electronic.product');
-    Route::get('/cart',[ElectronicController::class,'cart'])->name('electronic.cart');
-    Route::get('/checkout',[ElectronicController::class,'checkout'])->name('electronic.checkout');
-    Route::get('/wishlist',[ElectronicController::class,'wistlist'])->name('electronic.wistlist');
-    Route::get('/about',[ElectronicController::class,'about'])->name('electronic.about');
-    Route::get('/contact',[ElectronicController::class,'contact'])->name('electronic.contact');
-    Route::get('/my_account',[ElectronicController::class,'myAccount'])->name('electronic.my_account');
-});
+// Route::group(['namespace' => 'electronic'], function (){
+//     Route::get('/',[ElectronicController::class,'index'])->name('electronic.index');
+//     Route::get('/all_product',[ElectronicController::class,'allProduct'])->name('electronic.all_product');
+//     Route::get('/category',[ElectronicController::class,'category'])->name('electronic.category');
+//     Route::get('/product',[ElectronicController::class,'productDetail'])->name('electronic.product');
+//     Route::get('/cart',[ElectronicController::class,'cart'])->name('electronic.cart');
+//     Route::get('/checkout',[ElectronicController::class,'checkout'])->name('electronic.checkout');
+//     Route::get('/wishlist',[ElectronicController::class,'wistlist'])->name('electronic.wistlist');
+//     Route::get('/about',[ElectronicController::class,'about'])->name('electronic.about');
+//     Route::get('/contact',[ElectronicController::class,'contact'])->name('electronic.contact');
+//     Route::get('/my_account',[ElectronicController::class,'myAccount'])->name('electronic.my_account');
+// });
 
 Route::group(['namespace' => 'electronic'], function (){
     Route::get('/',[ElectronicController::class,'index'])->name('electronic.index');
@@ -53,8 +56,7 @@ Route::group(['namespace' => 'electronic'], function (){
     Route::get('/contact',[ElectronicController::class,'contact'])->name('electronic.contact');
     Route::get('/blog',[ElectronicController::class,'blog'])->name('electronic.blog');
     Route::get('/blog_detail',[ElectronicController::class,'blogDetail'])->name('electronic.blog_detail');
-    Route::get('/adminlte',[ElectronicController::class,'adminlte'])->name('electronic.adminlte');
-    Route::get('/table',[ElectronicController::class,'table'])->name('electronic.table');
+    Route::get('/my_account',[ElectronicController::class,'myAccount'])->name('electronic.my_account');
 });
 
 Route::group(['namespace' => 'auth'], function (){

@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UserCreateRequest;
 use App\Http\Requests\UserUpdateRequest;
-use App\Models\CategoryUser;
 use App\Services\Admin\CategoryUserService;
 use App\Services\Admin\UserService;
 use Illuminate\Http\Request;
@@ -25,7 +24,7 @@ class UserController extends Controller
     }
     public function index()
     {
-        $users = $this->userService->getUser(3);
+        $users = $this->userService->getModel();
         return view('admin.user.index', compact('users'));
     }
 
@@ -49,7 +48,7 @@ class UserController extends Controller
     public function store(UserCreateRequest $request)
     {
         $userParam = $request->all();
-        if ($this->userService->create($userParam)) {
+        if ($this->userService->createModel($userParam)) {
             return redirect()->route('user.index')->with('msgAddSuccess', 'Thêm người dùng thành công.');
         } else {
             return redirect()->route('user.create')->with('msgAddFail', 'Thêm người dùng không thành công.');
@@ -76,7 +75,7 @@ class UserController extends Controller
     public function edit($id)
     {
         $categoryUser = $this->categoryUserService->getUserForSelect();
-        $user = $this->userService->getUserUpdate($id);
+        $user = $this->userService->getModelUpdate($id);
 
         return view('admin.user.edit', compact('categoryUser', 'user'));
     }
@@ -91,10 +90,10 @@ class UserController extends Controller
     public function update(UserUpdateRequest $request, $id)
     {
         $userParam = $request->all();
-        if ($this->userService->update($userParam, $id)) {
+        if ($this->userService->updateModel($userParam, $id)) {
             return redirect()->route('user.index')->with('msgUpdateSuccess', 'Cập nhật thành công');
         } else {
-            return redirect()->route('user.create')->with('msgAddFail', 'Thêm danh mục không thành công.');
+            return redirect()->route('user.edit')->with('msgAddFail', 'Thêm danh mục không thành công.');
         }
     }
 
@@ -106,7 +105,7 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        if ($this->userService->delete($id)) {
+        if ($this->userService->deleteModel($id)) {
             return redirect()->route('user.index')->with('msgDeleteSuccess', 'Xóa thành công');
         } else {
             return redirect()->route('user.index')->with('msgDeleteFail', 'Xóa không thành công');

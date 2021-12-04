@@ -199,27 +199,33 @@
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-table"></i>
               <p>
-                Tables
+                Quản lý
                 <i class="fas fa-angle-left right"></i>
               </p>
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="../tables/simple.html" class="nav-link">
+                <a href="{{ route('category_user.index') }}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Quản lý danh mục</p>
+                  <p>Danh mục người dùng</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="{{ route('user.index') }}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Quản lý người dùng</p>
+                  <p>Người dùng</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="../tables/jsgrid.html" class="nav-link">
+                <a href="{{ route('category_product.index') }}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>jsGrid</p>
+                  <p>Danh mục sản phẩm</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{ route('user.index') }}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Sản phẩm</p>
                 </a>
               </li>
             </ul>

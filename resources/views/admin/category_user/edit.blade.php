@@ -27,9 +27,9 @@
                 <div class="card card-primary p-4">
                     @include('template.admin.msgUpdateFail')
                     @include('template.errorValidate')
-                    {!! Form::model($user, ['method' => 'PUT', 'route' => ['user.update', $user->id], 'enctype' => 'multipart/form-data']) !!}
-                        @include('admin.user.form')
-                        {!! Form::submit('Sửa người dùng', ['class' => 'btn btn-success']) !!}
+                    {!! Form::model($categoryUser, ['method' => 'PUT', 'route' => ['category_user.update', $categoryUser->id], 'enctype' => 'multipart/form-data']) !!}
+                        @include('admin.category_user.form')
+                        {!! Form::submit('Sửa danh mục người dùng', ['class' => 'btn btn-success']) !!}
                     {!! Form::close() !!}
                 </div>
             </div>
