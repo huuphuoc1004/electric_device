@@ -15,3 +15,6 @@ mix.js('resources/js/app.js', 'public/js')
     .postCss('resources/css/app.css', 'public/css', [
         //
     ]);
+mix.copyDirectory('node_modules/admin-lte/docs_html/assets', 'public/admin_source/assets');
+mix.copyDirectory('node_modules/admin-lte/dist', 'public/admin_source/dist');
+mix.copyDirectory('node_modules/admin-lte/plugins', 'public/admin_source/plugins');

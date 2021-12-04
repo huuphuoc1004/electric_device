@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UserCreateRequest extends FormRequest
+class UserUpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -27,8 +27,7 @@ class UserCreateRequest extends FormRequest
             'name' => 'required|min:2',
             'phone' => 'required|digits:10',
             'email' => 'required|email',
-            'password' => 'required|min:6',
-            'confirm_password' => 'required|min:6|same:password',
+            'confirm_password' => 'same:password',
         ];
     }
     public function messages(){
@@ -39,10 +38,6 @@ class UserCreateRequest extends FormRequest
             'phone.digits' => 'Số điện thoại phải có 10 số',
             'email.required' => 'Email không được để trống',
             'email.email' => 'Email phải có dạng abc@xyz',
-            'password.required' => 'Password không được để trống',
-            'password.min' => 'Password phải ít nhất có 6 ký tự',
-            'confirm_password.required' => 'Confirm Password không được để trống',
-            'confirm_password.min' => 'Confirm Password phải ít nhất có 6 ký tự',
             'confirm_password.same' => 'Confirm Password phải giống Password',
         ];
     }

@@ -22,6 +22,7 @@ use Illuminate\Support\Facades\Route;
 Route::prefix('admin')->middleware('auth')->group(function(){
     Route::get('/',[AdminController::class,'index'])->name("admin.index");
     Route::resource('user', UserController::class);
+    Route::get('/searchUser',[UserController::class,'search'])->name('user.search');
     Route::resource('product', ProductController::class);
     Route::resource('category_product', CategoryProductController::class);
     Route::get('/form',[ProductController::class,'form'])->name("admin.form");
@@ -52,6 +53,8 @@ Route::group(['namespace' => 'electronic'], function (){
     Route::get('/contact',[ElectronicController::class,'contact'])->name('electronic.contact');
     Route::get('/blog',[ElectronicController::class,'blog'])->name('electronic.blog');
     Route::get('/blog_detail',[ElectronicController::class,'blogDetail'])->name('electronic.blog_detail');
+    Route::get('/adminlte',[ElectronicController::class,'adminlte'])->name('electronic.adminlte');
+    Route::get('/table',[ElectronicController::class,'table'])->name('electronic.table');
 });
 
 Route::group(['namespace' => 'auth'], function (){
